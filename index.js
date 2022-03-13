@@ -1,3 +1,6 @@
+//import and require dotenv
+
+require('dotenv').config()
 // import dependencies
 const express = require('express')
 const cheerio = require('cheerio')
@@ -5,7 +8,7 @@ const axios = require('axios')
 const cors = require('cors')
 
 // create port 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 //call express
 const app = express()
