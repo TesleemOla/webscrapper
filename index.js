@@ -18,11 +18,7 @@ app.get('/',(req,res)=>{
 })
 
 const newspaper =[
-    {
-        name: "Bloomberg",
-        url: "https://www.bloomberg.com/cryptocurrencies",
-        base:''
-    },
+
     {
         name: "Guardian",
         url: "https://www.theguardian.com/technology/cryptocurrencies",
@@ -32,11 +28,6 @@ const newspaper =[
         name: "Reuters",
         url: "https://www.reuters.com/business/future-of-money/",
         base:'https://www.reuters.com'
-    },
-    {
-        name: "Financial Times",
-        url: "https://www.ft.com/cryptocurrencies",
-        base:''
     },
     {
         name: "BBC",
