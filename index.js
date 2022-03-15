@@ -7,7 +7,7 @@ const cheerio = require('cheerio')
 const axios = require('axios')
 const cors = require('cors')
 
-// create port 
+// create port
 const PORT = process.env.PORT || 5000
 
 //call express
@@ -15,6 +15,7 @@ const app = express()
 
 // cors middleware
 app.use(cors())
+
 //get news from sites
 app.get('/',(req,res)=>{
     res.json('we are here')
@@ -39,10 +40,11 @@ const newspaper =[
     }
 ]
 
-
+let id = 0
 const newsArray = []
     newspaper.forEach(newspaper=>{
         const url = newspaper.url
+
         axios.get(url)
             .then( result => {
                 const html = result.data
@@ -50,18 +52,20 @@ const newsArray = []
                 $('a:contains("crypto")', html).each(function () {
                     const title = $(this).text()
                     const url = $(this).attr('href')
+                    id += 1
                     newsArray.push({
                         title,
                         url: newspaper.base + url,
-                        source: newspaper.name
+                        source: newspaper.name,
+                        id
                     })
-                })  
-               
+                })
+
             })
         })
 
 app.get('/news', (req,res)=>{
-    res.json(newsArray)
+    return res.json(newsArray)
 })
 
 //listen to port
