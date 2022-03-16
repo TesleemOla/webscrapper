@@ -36,7 +36,7 @@ const newspaper =[
     {
         name: "BBC",
         url: "https://www.bbc.com/news/topics/cyd7z4rvdm3t/cryptocurrency",
-        base:'https://www.bbc.com/news/topics/cyd7z4rvdm3t/cryptocurrency'
+        base:'https://www.bbc.com/'
     }
 ]
 
