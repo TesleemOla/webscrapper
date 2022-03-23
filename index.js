@@ -53,12 +53,20 @@ const newsArray = []
                     const title = $(this).text()
                     const url = $(this).attr('href')
                     id += 1
-                    newsArray.push({
+                    const newItem = {
                         title,
                         url: newspaper.base + url,
                         source: newspaper.name,
                         id
+                    }
+                    const check = newsArray.find(item=>{
+                      return item.url == newItem.url
                     })
+                    if(check){
+                      return
+                    }else{
+                    newsArray.push(newItem)
+                  }
                 })
 
             })
