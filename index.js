@@ -7,6 +7,7 @@ const cheerio = require('cheerio')
 const axios = require('axios')
 const cors = require('cors')
 
+
 // create port
 const PORT = process.env.PORT || 5000
 
@@ -16,6 +17,19 @@ const app = express()
 // cors middleware
 app.use(cors())
 
+// cors options
+// let whitelist = ["http://localhost:3000/", "http://webscrapperfrontend.vercel.app/"]
+
+// let corsOptions = {
+//     origin: function (origin, callback) {
+//         if(whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         }
+//         else{
+//             callback(new Error("Not allowed by CORS"))
+//         }
+//     }
+// }
 //get news from sites
 app.get('/',(req,res)=>{
     res.json('we are here')
@@ -37,6 +51,11 @@ const newspaper =[
         name: "BBC",
         url: "https://www.bbc.com/news/topics/cyd7z4rvdm3t/cryptocurrency",
         base:'https://www.bbc.com'
+    },
+    {
+        name: "CNN",
+        url: "https://edition.cnn.com/business/tech",
+        base: "https://edition.cnn.com/"
     }
 ]
 
@@ -73,7 +92,7 @@ const newsArray = []
         })
 
 app.get('/news', (req,res)=>{
-    return res.json(newsArray)
+    return res.status(200).json(newsArray)
 })
 
 //listen to port
