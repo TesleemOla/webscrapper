@@ -6,7 +6,7 @@ const express = require('express')
 const cheerio = require('cheerio')
 const axios = require('axios')
 const cors = require('cors')
-
+const { v4: uuidv4} = require('uuid')
 
 // create port
 const PORT = process.env.PORT || 5000
@@ -69,9 +69,11 @@ const newsArray = []
                 const html = result.data
                 const $ = cheerio.load(html)
                 $('a:contains("crypto")', html).each(function () {
+                   
                     const title = $(this).text()
                     const url = $(this).attr('href')
-                    id += 1
+                    id = uuidv4()
+                    
                     const newItem = {
                         title,
                         url: newspaper.base + url,
@@ -81,10 +83,11 @@ const newsArray = []
                     const check = newsArray.find(item=>{
                       return item.url == newItem.url
                     })
-                    if(check){
+                    const imgtitle = (newItem.title.startsWith("<img"))
+                    if(check || imgtitle){
                       return
                     }else{
-                    newsArray.push(newItem)
+                       newsArray.push(newItem)
                   }
                 })
 
